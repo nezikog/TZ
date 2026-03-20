@@ -1,18 +1,18 @@
 'use strict';
+// Импортируем модули
 import { applyTheme, switcherTheme } from "./modules/switcher/switcherLogic.js";
 import { loadTheme } from "./modules/switcher/saveSwitcherTheme.js";
-// import {typesObj} from "./modules/types/typeLoadLogic.js";
 import { deleteSuccessTasks } from "./modules/deleteSuccesTasks/delButtSuccesLogic.js";
 import {createTask} from "./modules/tasks/addTaskLogic.js";
-import {clearInputs, errorThrow, errorThrowBack } from "./modules/tasks/settingForTask.js";
-import { Empty } from "./modules/tasks/empty.js";
+import {clearInputs, errorThrow} from "./modules/tasks/settingForTask.js";
 import { getDataForTask } from "./modules/tasks/form.js";
-import { saveTasks, renderTasks, addTask, getTasks  } from "./modules/storage/localStorage.js";
+import { renderTasks, addTask  } from "./modules/storage/localStorage.js";
 import { filterTasksByCurrentStatus } from "./modules/filter/filterTasks.js";
 import { initTaskHandlers } from './modules/tasks/taskHandler.js';
 import { enableTaskNameEditing } from "./modules/tasks/editTaskName.js";
+// Импортируем модули
 
-
+//Создаем константы/переменные
 const modalOverlay = document.getElementById('modalOverlay');
 const addTaskBtn = document.getElementById('addTask');
 const closeSettingsBtn = document.getElementById('closeSettings');
@@ -25,19 +25,65 @@ const filterAll = document.getElementById("all");
 const filterActive = document.getElementById("active");
 const filterSuccess = document.getElementById("success");
 
+const switcher = document.querySelector('.switcher');
+
+let currentFilter = "all"; 
 
 const resetButtonStyles = () => {
     filterAll.style.backgroundColor = "";
     filterActive.style.backgroundColor = "";
     filterSuccess.style.backgroundColor = "";
 };
-
-
-deleteSuccesTasksButton.addEventListener('click', () => deleteSuccessTasks());
+//Создаем константы/переменные
 
 
 
-let currentFilter = "all"; 
+//Переключатель темы приложения
+switcher.addEventListener('click', switcherTheme);
+applyTheme(loadTheme());//Подгрузили в localStorage
+
+//Вариации закрытия модального окна
+addTaskBtn.addEventListener('click', () => {
+    modalOverlay.style.display = 'flex';
+});
+
+closeSettingsBtn.addEventListener('click', () => {
+    clearInputs();
+});
+
+modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) {
+        clearInputs();
+    }
+});
+//Вариации закрытия модального окна
+
+deleteSuccesTasksButton.addEventListener('click', () => deleteSuccessTasks());//Для удаления выполненных задач
+
+//Тут считываем подгрузку страницы и ререндерим наши задачи, чтобы подгрузить сохраненные в localStorage
+document.addEventListener("DOMContentLoaded", () => {
+    renderTasks(taskArea, createTask);
+    enableTaskNameEditing(taskArea);//Для редактирования db кликом
+    saveBtn.addEventListener("click", () => {
+        const data = getDataForTask(); //Получаем данные с инуптов
+        if (!data) { //Валидатор
+            errorThrow();
+            return;
+        }
+
+        addTask({ //настройка
+            id: Date.now(),
+            ...data,
+            status: ["all", "active"]
+        });
+
+        renderTasks(taskArea, createTask); // Ререндер
+        clearInputs(); //Скидываем нарушения и данные в инпутах
+    });
+
+    enableTaskNameEditing(taskArea); //Для редактирования db кликом
+    
+});
 
 initTaskHandlers(
     taskArea,
@@ -69,63 +115,13 @@ filterSuccess.addEventListener("click", () => {
 
 
 
-document.addEventListener("DOMContentLoaded", () => {
-    renderTasks(taskArea, createTask);
-    enableTaskNameEditing(taskArea);
-    saveBtn.addEventListener("click", () => {
-        const data = getDataForTask();
-        if (!data) {
-            errorThrow();
-            return;
-        }
 
-        addTask({
-            id: Date.now(),
-            ...data,
-            status: ["all", "active"]
-        });
 
-        renderTasks(taskArea, createTask);
-        clearInputs();
-    });
-
-    enableTaskNameEditing(taskArea);
-    
-});
-
-// saveBtn.addEventListener("click", () => {
-//     let idCount = 0;
-//     const data = getDataForTask();
-//     if(!data){
-//         errorThrow();
-//         return;
-//     }
-//     const taskData = {
-//     id: idCount++,
-//     ...data
-//     };
-//     const task = createTask(taskData);
-//     taskArea.innerHTML += task;
-    
-//     clearInputs();
-// })
 
 
 
 //SETTINGS FOR TASK
-addTaskBtn.addEventListener('click', () => {
-    modalOverlay.style.display = 'flex';
-});
 
-closeSettingsBtn.addEventListener('click', () => {
-    clearInputs();
-});
-
-modalOverlay.addEventListener('click', (e) => {
-    if (e.target === modalOverlay) {
-        clearInputs();
-    }
-});
 
 
 
@@ -136,28 +132,7 @@ modalOverlay.addEventListener('click', (e) => {
 //SETTINGS FOR TASK
 
 
-// butt.addEventListener("click", () =>{
-//     const taskData = getTaskData();
-//     if(!taskData) return;
-//     taskArea.innerHTML += createTask(taskData);
-//     console.log(taskData);
-// });
 
-// if(1 > 0){
-//     taskArea.innerHTML += Empty();
-// }
-//КОГДА БУДУ СОХРАНЯТЬ ЗАДАЧИ В LOCALSTORAGE СМОТРЕТЬ ЕСТЬ ЛИ ТАМ ЗАДАЧИ ЕСЛИ НЕТ ТО ЧТОБЫ ВКЛЮЧАЛАСЬ ЭТА ЧАСТЬ КОДА
 
-// toggleTypes(); ДЛЯ ФИЛЬТРА
 
-// document.addEventListener('click', () => {
-//     console.log("type:", getCurrentType());
-// }); ДЛЯ ФИЛЬТРА
 
-applyTheme(loadTheme());
-
-// const deleteSuccesTasksButton = document.getElementById("delSucces");
-// deleteSuccesTasksButton.style.display = deleteSuccesLogic(data);
-
-const switcher = document.querySelector('.switcher');
-switcher.addEventListener('click', switcherTheme);

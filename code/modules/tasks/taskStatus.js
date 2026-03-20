@@ -1,10 +1,10 @@
 'use strict';
-
+//Функция
 export const updateTaskStatus = (checkboxChecked, currentStatuses) => {
-
+    //Проверка на пустоту
     let statuses = Array.isArray(currentStatuses) ? [...currentStatuses] : ["all", "active"];
 
-    if (checkboxChecked) {
+    if (checkboxChecked) { //логика статусов
         const index = statuses.indexOf("active");
         if (index !== -1){ 
             statuses[index] = "success";

@@ -2,18 +2,14 @@
 
 import { getTasks, saveTasks, renderTasks } from "../storage/localStorage.js";
 import { createTask } from "../tasks/addTaskLogic.js";
-
+//Удаление выполненных задач
 export const deleteSuccessTasks = () => {
-    // Получаем все задачи
-    const tasks = getTasks();
-
-    // Фильтруем: оставляем только те задачи, у которых нет "success" в статусе
+    const tasks = getTasks();//Получение
+    //Фильтр
     const filteredTasks = tasks.filter(task => !task.status.includes("success"));
 
-    // Сохраняем обновленный список
-    saveTasks(filteredTasks);
+    saveTasks(filteredTasks);//сохранение
 
-    // Перерисовываем задачи на странице
     const taskArea = document.querySelector(".tasks");
-    renderTasks(taskArea, createTask);
+    renderTasks(taskArea, createTask); //ререндер
 };

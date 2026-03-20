@@ -1,8 +1,8 @@
 'use strict';
-
+//Наш HTML задач
 export const createTask = ({ id, name, status = ["all", "active"], deadline }) => {
     const mainStatus = Array.isArray(status) ? status[1] || status[0] : status;
-    const formName = name.charAt(0).toUpperCase() + name.slice(1);
+    const formName = name.charAt(0).toUpperCase() + name.slice(1); //Всегда с заглавной буквы
     return `
     <div class="task ${status.join(' ')}" data-id="${id}" data-status="${status.join(',')}">
         <div class="info">

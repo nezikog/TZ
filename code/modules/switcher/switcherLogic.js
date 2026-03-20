@@ -5,6 +5,8 @@ const body = document.body;
 const moon = document.getElementById("moon");
 const sun = document.getElementById("sun");
 
+//Логика распределения тем + анимации(см.css)
+
 export const applyTheme = (theme) => {
     if(theme === "dark"){
         body.classList.add('dark');
@@ -22,7 +24,7 @@ export const applyTheme = (theme) => {
 
     saveTheme(theme);
 }
-
+//Обыкновенный свитчер + подгружаем тему, которую пользователь ставил в последний раз
 export const switcherTheme = () =>{
     const currentTheme = loadTheme();
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';

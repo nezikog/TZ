@@ -1,15 +1,15 @@
 'use strict';
-
+//Импорт
 import {
     deleteTaskById,
     updateTaskStatusById,
     renderTasks
 } from '../storage/localStorage.js';
 
+//Функция для удаления задач
 export const initTaskHandlers = (taskArea, createTaskFn, getCurrentFilter, applyFilter) => {
 
-    // DELETE
-    taskArea.addEventListener("click", (e) => {
+    taskArea.addEventListener("click", (e) => { 
         if (!e.target.classList.contains("delete")) return;
 
         const id = parseInt(e.target.dataset.id);
@@ -19,8 +19,7 @@ export const initTaskHandlers = (taskArea, createTaskFn, getCurrentFilter, apply
         renderTasks(taskArea, createTaskFn);
         applyFilter(getCurrentFilter());
     });
-
-    // CHECKBOX
+    //Обновление статусов с 'активно' на 'выполненно'
     taskArea.addEventListener("change", (e) => {
         if (!e.target.matches('input[type="checkbox"]')) return;
 

@@ -1,5 +1,5 @@
 'use strict';
-
+//Тут фильтр, отсеивает и оставляет разные задачи, смотря на статусы
 export const  filterTasksByCurrentStatus = (currentFilter) => {
     const allTasksElements = document.querySelectorAll(".task");
     
