@@ -1,31 +1,25 @@
 'use strict';
 import { applyTheme, switcherTheme } from "./modules/switcher/switcherLogic.js";
 import { loadTheme } from "./modules/switcher/saveSwitcherTheme.js";
-import {typesObj} from "./modules/types/typeLoadLogic.js";
-// import { deleteSuccesLogic } from "./modules/deleteSuccesTasks/delButtSuccesLogic.js";
+// import {typesObj} from "./modules/types/typeLoadLogic.js";
+import { deleteSuccessTasks } from "./modules/deleteSuccesTasks/delButtSuccesLogic.js";
 import {createTask} from "./modules/tasks/addTaskLogic.js";
 import {clearInputs, errorThrow, errorThrowBack } from "./modules/tasks/settingForTask.js";
 import { Empty } from "./modules/tasks/empty.js";
-import { initTaskHandlers } from './modules/tasks/taskHandler.js';
 import { getDataForTask } from "./modules/tasks/form.js";
-import { saveTask, renderTasks } from "./modules/storage/localStorage.js";
+import { saveTasks, renderTasks, addTask, getTasks  } from "./modules/storage/localStorage.js";
 import { filterTasksByCurrentStatus } from "./modules/filter/filterTasks.js";
-import { initFilter } from './modules/tasks/taskHandler.js';
-
+import { initTaskHandlers } from './modules/tasks/taskHandler.js';
+import { enableTaskNameEditing } from "./modules/tasks/editTaskName.js";
 
 
 const modalOverlay = document.getElementById('modalOverlay');
 const addTaskBtn = document.getElementById('addTask');
 const closeSettingsBtn = document.getElementById('closeSettings');
 const saveBtn = document.getElementById('saveTask');
-const nameInput = document.getElementById("nameTask");
-const dateInput = document.getElementById("dateTask");
 const taskArea = document.querySelector(".tasks");
-const butt = document.getElementById("addTask");
 
-const actives = document.querySelectorAll(".active");
-const success = document.querySelectorAll(".success");
-const all = document.querySelectorAll(".all");
+const deleteSuccesTasksButton = document.getElementById("delSucces");
 
 const filterAll = document.getElementById("all");
 const filterActive = document.getElementById("active");
@@ -39,12 +33,18 @@ const resetButtonStyles = () => {
 };
 
 
+deleteSuccesTasksButton.addEventListener('click', () => deleteSuccessTasks());
 
 
 
 let currentFilter = "all"; 
 
-initFilter(taskArea, () => currentFilter);
+initTaskHandlers(
+    taskArea,
+    createTask,
+    () => currentFilter,
+    filterTasksByCurrentStatus
+);
 
 filterAll.addEventListener("click", () => {
     currentFilter = "all";
@@ -70,20 +70,24 @@ filterSuccess.addEventListener("click", () => {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    initTaskHandlers(taskArea); 
-
-
-    renderTasks(taskArea, null, createTask);
-
+    renderTasks(taskArea, createTask);
+    enableTaskNameEditing(taskArea);
     saveBtn.addEventListener("click", () => {
         const data = getDataForTask();
+
         if (!data) {
             errorThrow();
             return;
         }
 
-        saveTask(taskArea);
+        addTask({
+            id: Date.now(),
+            ...data,
+            status: ["all", "active"]
+        });
 
+        renderTasks(taskArea, createTask);
+        enableTaskNameEditing(taskArea);
         clearInputs();
     });
 });
@@ -104,6 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
 //     clearInputs();
 // })
+
 
 
 //SETTINGS FOR TASK
@@ -152,7 +157,7 @@ modalOverlay.addEventListener('click', (e) => {
 applyTheme(loadTheme());
 
 // const deleteSuccesTasksButton = document.getElementById("delSucces");
-// deleteSuccesTasksButton.style.display = deleteSuccesLogic();
+// deleteSuccesTasksButton.style.display = deleteSuccesLogic(data);
 
 const switcher = document.querySelector('.switcher');
 switcher.addEventListener('click', switcherTheme);

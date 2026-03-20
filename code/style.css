@@ -1,3 +1,7 @@
+/* IMPORTS */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+/* IMPORTS */
+
 /* GLOBAL */
 html,body{
     height: 100%;
@@ -8,6 +12,7 @@ html,body{
 body{
     display: flex;
     flex-direction: column;
+    font-family: "Roboto", sans-serif;
 }
 
 header, footer{
@@ -133,12 +138,14 @@ header img{
 
 .info {
     display: flex;
+    align-items: center;
 }
 
 .checkbox-mark {
     display: flex;
     align-items: center; 
     height: 100%;
+    gap: .5em;
 }
 
 
@@ -151,15 +158,24 @@ header img{
 .base-info {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 0.5em;
 }
 
+.delete{
+    cursor: pointer;
+    transition: transform .3s ease-in;
+}
 
-.dedline{
+.delete:hover{
+    transform: scale(1.5);
+    transition: transform .3s ease-in;
+}
+
+.deadline{
     display: flex;
-    align-items: center;
-    gap: 5px;
+    gap: .5em;
 }
+
 
 /* MODAL */
 
@@ -216,7 +232,7 @@ header img{
     transition: background-color .3s ease-in;
 }
 
-input[type='text']{
+.settings input[type='text']{
     border: 1px solid rgba(0, 0, 0, 0.12);
     padding: 10px;
     border-radius: 2em;
@@ -225,13 +241,13 @@ input[type='text']{
     background-color: rgb(247, 248, 250);
 }
 
-input[type='text']:focus{
+.settings input[type='text']:focus{
     outline: none;
     transform: translateY(-5px);
     transition: transform .3s ease-in;
 }
 
-input[type='date']{
+.settings input[type='date']{
     border: 1px solid rgba(0, 0, 0, 0.12);
     padding: 10px;
     border-radius: 2em;
@@ -292,9 +308,6 @@ footer button:hover{
 /* FOOTER */
 
 /* OTHER */
-.error{
-    border: 2px solid rgb(255 4 4 / 46%) !important;
-}
 
 .success{
     text-decoration: line-through solid rgb(0,0,0) 2px;
@@ -303,6 +316,12 @@ footer button:hover{
 
 .hidden{
     display: none;
+}
+
+.task-edit-input{
+    outline: 1px solid rgba(0, 0, 0, 0.12);
+    height: 2em;
+    padding: 2px;
 }
 
 /* OTHER */

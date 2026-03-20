@@ -6,7 +6,10 @@ export const updateTaskStatus = (checkboxChecked, currentStatuses) => {
 
     if (checkboxChecked) {
         const index = statuses.indexOf("active");
-        if (index !== -1) statuses[index] = "success";
+        if (index !== -1){ 
+            statuses[index] = "success";
+
+        }
     } else {
         const index = statuses.indexOf("success");
         if (index !== -1) statuses[index] = "active";
