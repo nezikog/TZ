@@ -1,0 +1,63 @@
+@media screen and (max-width: 1440px) {
+    .logo img{
+        width: 5em;
+    }
+    header button{
+        padding: 0.3em 1.5em;
+    }
+    .switcher img{
+        padding: 0.5em;
+        height: 30px;
+    }
+}
+
+@media screen and (max-width: 975px) {
+    .logo img{
+        width: 3em;
+    }
+    header button{
+        padding: 0.15em .5em;
+    }
+    .switcher img{
+        padding: 0.3em;
+        height: 25px;
+    }
+    .filter{
+        display: flex;
+        gap: .4em;
+        flex-direction: column;
+    }
+    .tasks{
+        width: 90%;
+    }
+
+    .settings input{
+        padding: 15px;
+    }
+}
+
+
+@media screen and (max-width: 350px) {
+    .logo img{
+        width: 2.5em;
+    }
+    header button{
+        padding: 0.1em .2em;
+    }
+    .switcher img{
+        padding: 0.3em;
+        height: 20px;
+    }
+    .filter{
+        display: flex;
+        gap: 0.15em;
+        flex-direction: column;
+    }
+    main{
+        display: flex;
+        padding: 10px;
+    }
+    .settings input{
+        padding: 20px !important;
+    }
+}

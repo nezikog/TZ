@@ -203,7 +203,7 @@ header img{
     background-color: rgb(255, 255, 255);
     padding: 20px;
     border-radius: 10px;
-    width: 20%;
+    width: 50%;
     height: 40%;
     position: relative;
     box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
@@ -324,6 +324,7 @@ footer button:hover{
 .success{
     text-decoration: line-through solid rgb(0,0,0) 2px;
     border: 3px solid rgba(0, 128, 0, 0.528);
+    color: rgb(185, 185, 185);
 }
 
 .hidden{
@@ -378,6 +379,7 @@ footer button:hover{
 
 .dark .success{
     text-decoration: line-through solid rgb(255, 255, 255) 2px;
+    color: rgb(185, 185, 185);
 }
 
 .dark .settings{
