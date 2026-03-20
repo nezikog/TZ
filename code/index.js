@@ -10,6 +10,9 @@ import { initTaskHandlers } from './modules/tasks/taskHandler.js';
 import { getDataForTask } from "./modules/tasks/form.js";
 import { saveTask, renderTasks } from "./modules/storage/localStorage.js";
 import { filterTasksByCurrentStatus } from "./modules/filter/filterTasks.js";
+import { initFilter } from './modules/tasks/taskHandler.js';
+
+
 
 const modalOverlay = document.getElementById('modalOverlay');
 const addTaskBtn = document.getElementById('addTask');
@@ -28,7 +31,6 @@ const filterAll = document.getElementById("all");
 const filterActive = document.getElementById("active");
 const filterSuccess = document.getElementById("success");
 
-let currentFilter = "all";
 
 const resetButtonStyles = () => {
     filterAll.style.backgroundColor = "";
@@ -36,32 +38,32 @@ const resetButtonStyles = () => {
     filterSuccess.style.backgroundColor = "";
 };
 
-const showTasks = (tasksToShow) => {
-    const allTasksElements = document.querySelectorAll(".task");
-    allTasksElements.forEach(task => task.style.display = "none");
-    tasksToShow.forEach(task => task.style.display = "block");
-};
 
 
+
+
+let currentFilter = "all"; 
+
+initFilter(taskArea, () => currentFilter);
 
 filterAll.addEventListener("click", () => {
     currentFilter = "all";
     resetButtonStyles();
-    filterAll.style.backgroundColor = "red";
+    filterAll.style.backgroundColor = "rgb(124, 154, 242)";
     filterTasksByCurrentStatus(currentFilter);
 });
 
 filterActive.addEventListener("click", () => {
     currentFilter = "active";
     resetButtonStyles();
-    filterActive.style.backgroundColor = "red";
+    filterActive.style.backgroundColor = "rgb(124, 154, 242)";
     filterTasksByCurrentStatus(currentFilter);
 });
 
 filterSuccess.addEventListener("click", () => {
     currentFilter = "success";
     resetButtonStyles();
-    filterSuccess.style.backgroundColor = "red";
+    filterSuccess.style.backgroundColor = "rgb(124, 154, 242)";
     filterTasksByCurrentStatus(currentFilter);
 });
 

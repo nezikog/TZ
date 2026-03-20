@@ -3,8 +3,8 @@
 import { updateTaskStatus } from './taskStatus.js';
 import { deleteTask } from '../storage/localStorage.js';
 import { filterTasksByCurrentStatus } from '../filter/filterTasks.js';
-
-export const initTaskHandlers = (taskArea) => {
+import { updateTaskStatusInStorage } from '../storage/localStorage.js';
+export const initTaskHandlers = (taskArea, ) => {
 
     
     taskArea.addEventListener("change", (e) => {
@@ -37,29 +37,28 @@ export const initTaskHandlers = (taskArea) => {
         taskElem.dataset.status = updatedStatuses.join(",");
 
         taskElem.className = `task ${updatedStatuses.join(" ")}`;
-    });
-
-    taskArea.addEventListener("change", (e) => {
-    if (!e.target.matches('input[type="checkbox"]')) return;
-
-    const taskElem = e.target.closest(".task");
-
-    let currentStatuses = taskElem.dataset.status
-        ? taskElem.dataset.status.split(",")
-        : ["all", "active"];
-
-    const updatedStatuses = updateTaskStatus(e.target.checked, currentStatuses);
-
-    // обновляем DOM
-    taskElem.dataset.status = updatedStatuses.join(",");
-    taskElem.className = `task ${updatedStatuses.join(" ")}`;
-
-    // обновляем localStorage
-    const taskId = parseInt(e.target.dataset.id);
-    updateTaskStatusInStorage(taskId, e.target.checked);
-
-    // сразу применяем текущий фильтр
-    filterTasksByCurrentStatus(currentFilter);
 });
-    
 };
+export const initFilter = (taskArea, getCurrentFilter) =>{
+    taskArea.addEventListener("change", (e) => {
+        if (!e.target.matches('input[type="checkbox"]')) return;
+
+        const taskElem = e.target.closest(".task");
+
+        let currentStatuses = taskElem.dataset.status
+            ? taskElem.dataset.status.split(",")
+            : ["all", "active"];
+
+        const updatedStatuses = updateTaskStatus(e.target.checked, currentStatuses);
+
+        // обновляем DOM
+        taskElem.dataset.status = updatedStatuses.join(",");
+        taskElem.className = `task ${updatedStatuses.join(" ")}`;
+
+        // обновляем localStorage
+        const taskId = parseInt(e.target.dataset.id);
+        updateTaskStatusInStorage(taskId, e.target.checked);
+
+        // сразу применяем текущий фильтр
+        filterTasksByCurrentStatus(getCurrentFilter());
+    });}

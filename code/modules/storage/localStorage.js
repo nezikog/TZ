@@ -38,14 +38,29 @@ export const renderTasks = (container, tasks = null, createTaskFn) => {
     container.innerHTML = html;
 };
 
-export const updateTaskStatusInStorage = (taskId, checkboxChecked) => {
+export const updateTaskStatusInStorage = (taskId, checked) => {
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
     const taskIndex = tasks.findIndex(t => t.id === taskId);
+    if (taskIndex === -1) {
+        console.warn(`Задача с id=${taskId} не найдена в localStorage!`);
+        return; // выходим, чтобы не было ошибки
+    }
 
-    const currentStatuses = tasks[taskIndex].status;
-    const updatedStatuses = updateTaskStatus(checkboxChecked, currentStatuses);
+    let statuses = Array.isArray(tasks[taskIndex].status)
+        ? [...tasks[taskIndex].status]
+        : ["all", "active"];
 
-    tasks[taskIndex].status = updatedStatuses;
+    if (checked) {
+        const idx = statuses.indexOf("active");
+        if (idx !== -1) statuses[idx] = "success";
+    } else {
+        const idx = statuses.indexOf("success");
+        if (idx !== -1) statuses[idx] = "active";
+    }
+
+    if (!statuses.includes("all")) statuses.unshift("all");
+
+    tasks[taskIndex].status = statuses;
     localStorage.setItem("tasks", JSON.stringify(tasks));
 };
