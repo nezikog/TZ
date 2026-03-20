@@ -20,7 +20,6 @@ const taskArea = document.querySelector(".tasks");
 const butt = document.getElementById("addTask");
 
 document.addEventListener("DOMContentLoaded", () => {
-    const data = getDataForTask();
     
     initTaskHandlers(taskArea);
     renderTasks(taskArea, null, createTask);
