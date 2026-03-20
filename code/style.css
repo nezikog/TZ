@@ -161,6 +161,13 @@ header img{
     gap: 0.5em;
 }
 
+.task-checkbox{
+    accent-color: rgb(0, 128, 0);
+    width: 18px;
+    height: 18px;
+}
+
+
 .delete{
     cursor: pointer;
     transition: transform .3s ease-in;
@@ -218,6 +225,7 @@ header img{
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .close-btn {
@@ -309,6 +317,10 @@ footer button:hover{
 
 /* OTHER */
 
+.error{
+    border: 2px solid rgb(255 4 4 / 46%) !important;
+}
+
 .success{
     text-decoration: line-through solid rgb(0,0,0) 2px;
     border: 3px solid rgba(0, 128, 0, 0.528);
@@ -325,3 +337,85 @@ footer button:hover{
 }
 
 /* OTHER */
+
+/* DARK THEME */
+
+.dark header, .dark footer{
+    background-color: rgb(55, 57, 62);
+    border: 1px solid rgb(255 255 255 / 5%);
+}
+
+.dark .logo{
+    background-color: rgb(255, 255, 255);
+    border-radius: 1em;
+    box-shadow: 4px 4px 8px 0px rgb(122 122 122);
+}
+
+.dark .button{
+    box-shadow: 4px 4px 8px 0px rgb(199 199 199 / 21%);
+}
+
+.dark .button:hover{
+    background-color: rgb(143, 162, 247) !important;
+}
+
+.dark #delSucces:hover{
+    background-color: rgb(127, 209, 174) !important;
+}
+
+.dark main{
+    background-color: rgb(42, 44, 51);
+}
+
+.dark .task{
+    background-color: rgb(55, 57, 62);
+    color: rgb(255,255,255);
+}
+
+.dark #saveTask{
+    background-color: rgb(30, 31, 36);
+}
+
+.dark .success{
+    text-decoration: line-through solid rgb(255, 255, 255) 2px;
+}
+
+.dark .settings{
+    background-color: rgb(55, 57, 62);
+}
+
+.dark #nameTask, .dark #dateTask{
+    background-color: rgb(42, 44, 51);
+    color: rgb(255,255,255);
+    box-shadow: 4px 4px 8px 0px rgb(199 199 199 / 21%);
+}
+
+.dark .settings #saveTask{
+    background-color: rgb(42, 44, 51);
+    color: rgb(255,255,255);
+    box-shadow: 4px 4px 8px 0px rgb(199 199 199 / 21%);
+}
+
+.dark .settings #saveTask:hover{
+    background-color: rgb(156, 163, 175)
+}
+
+.dark #dateTask::-webkit-calendar-picker-indicator{
+    cursor: pointer
+}
+
+.dark .closeBtn{
+    background-color: rgb(42, 44, 51);
+    cursor: pointer;
+    box-shadow: 1px 2px 8px 0px rgb(199 199 199 / 21%);
+}
+
+.dark .close-btn{
+    cursor: pointer;
+}
+
+.dark .closeBtn:hover{
+    background-color: rgb(242, 166, 198);
+}
+
+/* DARK THEME */

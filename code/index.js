@@ -74,7 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
     enableTaskNameEditing(taskArea);
     saveBtn.addEventListener("click", () => {
         const data = getDataForTask();
-
         if (!data) {
             errorThrow();
             return;
@@ -87,10 +86,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         renderTasks(taskArea, createTask);
+        clearInputs();
     });
 
     enableTaskNameEditing(taskArea);
-    clearInputs();
+    
 });
 
 // saveBtn.addEventListener("click", () => {
@@ -118,13 +118,12 @@ addTaskBtn.addEventListener('click', () => {
 });
 
 closeSettingsBtn.addEventListener('click', () => {
-    modalOverlay.style.display = 'none';
+    clearInputs();
 });
 
 modalOverlay.addEventListener('click', (e) => {
     if (e.target === modalOverlay) {
-        modalOverlay.style.display = 'none';
-        errorThrowBack();
+        clearInputs();
     }
 });
 
