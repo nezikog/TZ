@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToOo list</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../vendor/img/logo.svg" alt="ToDo List">
+        </div>
+        <div class="filter">
+            <button class="button" id="all">Все</button>
+            <button class="button" id="active">Активные</button>
+            <button class="button" id="succes">Выполненные</button>
+            <button class="button" id="delSucces">Удалить выполненные</button>
+            <!-- .delSucces только лишь при наличие выполненных -->
+        </div>
+       
+        <div class="switcher">
+            <img class="img-1" id="moon" src="../vendor/img/switcher/moon.svg" alt="Темная тема">
+            <img class="img-2" id="sun" src="../vendor/img/switcher/sun.svg" alt="Светлая тема"> 
+            <!-- Сделать так чтобы какая была тема сохранялась в localStorage -->
+        </div>
+    </header>
+    <main>
+        <div class="tasks">
+            <!-- <div class="task">
+                <div class="info">
+                    <div class="text-block">
+                        <div class="base-info">
+                            <label class="checkbox-mark">
+                                <input type="checkbox">
+                                <span></span>
+                            </label>
+                            <h1>Name</h1>
+                            <img class="delete" src="../vendor/img/task/trash.svg" alt="">
+                            <p class="status">• {status}</p>
+                        </div>
+
+                        <div class="dedline">
+                            <img src="../vendor/img/task/alarm.svg" alt="">
+                            <p>{deadline}</p>
+                        </div>
+                    </div>
+                </div> -->
+        </div>
+        <div class="modal-overlay" id="modalOverlay">
+            <div class="settings" id="settingsModal">
+                <input placeholder="Название задачи..." id="nameTask" type="text" required>
+                <input type="date" id="dateTask" required>
+                <div class="closeBtn">
+                    <button class="close-btn" id="closeSettings">×</button>
+                </div>
+                <button id="saveTask">Сохранить</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <button id="addTask">
+            +
+        </button>
+    </footer>
+    <script type="module" src="./index.js"></script>
+</body>
+</html>

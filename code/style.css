@@ -1,0 +1,304 @@
+/* GLOBAL */
+html,body{
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+}
+
+header, footer{
+    background-color: rgb(255,255,255);
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+main{
+    background-color: rgb(247, 248, 250);
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+
+/* GLOBAL */
+
+/* HEADER */
+header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.filter{
+    display: flex;
+    gap: 1em;
+}
+
+header button{
+    padding: 0.5em 2em;
+    border: none;
+    border-radius: 1em;
+    background-color: rgb(107, 114, 128);
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+header button:hover{
+    transform: translateY(-5px);
+    background-color: rgb(124, 154, 242);
+    transition: transform .3s ease-in, background-color .3s ease-in;
+}
+
+#delSucces:hover{
+    background-color: rgb(168, 216, 185) !important;
+    transition: transform .3s ease-in, background-color .3s ease-in !important;
+}
+
+header img{
+    cursor: pointer;
+}
+
+.switcher{
+    position: relative;
+    border-radius: 2em;
+    width: 58px;
+    height: 58px;
+    text-align: center;
+    display: inline-block;
+    transition: transform .3s ease-in;
+    
+}
+
+.switcher img{
+    box-shadow: 4px 3px 8px 0px rgba(34, 60, 80, 0.2);
+    border-radius: 2em;
+    padding: 0.5em;
+    position: absolute;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+    top: 0;
+    left: 0;
+}
+
+.switcher:hover{
+    transform: translateY(-5px);
+}
+
+.img-1{
+    opacity: 1;
+    transform: translateX(0);
+    z-index: 1;
+}
+.img-2{
+    opacity: 0;
+    transform: translateX(10px);
+    z-index: 2;
+}
+
+.switcher:hover .img-1{
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+.switcher:hover .img-2{
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* HEADER */
+
+/* MAIN */
+
+.tasks{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.task {
+    padding: 10px;
+    background-color: rgb(255,255,255);
+    height: 8em;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+.info {
+    display: flex;
+}
+
+.checkbox-mark {
+    display: flex;
+    align-items: center; 
+    height: 100%;
+}
+
+
+.text-block {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.base-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.dedline{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* MODAL */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    display: none; 
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.settings {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 10px;
+    width: 20%;
+    height: 40%;
+    position: relative;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: center;
+}
+
+.closeBtn{
+    width: 3em;
+    height: 3em;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 4px 3px 8px 0px rgba(34, 60, 80, 0.2);
+    border-radius: 100%;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.closeBtn:hover {
+    background-color: rgb(242, 198, 222);
+    transition: background-color .3s ease-in;
+}
+
+input[type='text']{
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    padding: 10px;
+    border-radius: 2em;
+    outline: none;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    background-color: rgb(247, 248, 250);
+}
+
+input[type='text']:focus{
+    outline: none;
+    transform: translateY(-5px);
+    transition: transform .3s ease-in;
+}
+
+input[type='date']{
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    padding: 10px;
+    border-radius: 2em;
+    outline: none;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    background-color: rgb(247, 248, 250);
+}
+
+#saveTask{
+    padding: 0.5em 2em;
+    border-radius: 1em;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    color: rgb(0, 0, 0);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background-color: rgb(247, 248, 250);
+}
+
+#saveTask:hover{
+    transform: translateY(-5px);
+    background-color: rgb(168, 216, 185);
+    color: rgb(255,255,255);
+    transition: transform .3s ease-in, background-color .3s ease-in;
+}
+
+
+
+/* MODAL */
+
+/* MAIN */
+
+/* FOOTER */
+
+footer{
+    text-align: center;
+}
+
+footer button{
+    border: none;
+    font-size: 54px;
+    padding: .2em;
+    width: 2em;
+    height: 2em;
+    border-radius: 100%;
+    background-color: #1F2937;
+    color: white;
+    cursor: pointer;
+    box-shadow: 4px 4px 6px 3px rgba(34, 60, 80, 0.2);
+    transition: transform 0.3s ease-in, background-color 0.3s ease-in;
+}
+
+footer button:hover{
+    transform: translateY(-5px);
+    background-color: #6B7280;
+}
+
+/* FOOTER */
+
+/* OTHER */
+.error{
+    border: 2px solid rgb(255 4 4 / 46%) !important;
+}
+
+.success{
+    text-decoration: line-through solid rgb(0,0,0) 2px;
+    border: 3px solid rgba(0, 128, 0, 0.528);
+}
+
+/* OTHER */
