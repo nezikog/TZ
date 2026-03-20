@@ -8,10 +8,7 @@ export const createTask = ({ id, name, status = ["all", "active"], deadline }) =
         <div class="info">
             <div class="text-block">
                 <div class="checkbox-mark">
-                    <label class="checkbox-mark">
-                        <input type="checkbox" class="task-checkbox" data-id="${id}" ${mainStatus === "success" ? "checked" : ""}>
-                        <span></span>
-                    </label>
+                    <input type="checkbox" class="task-checkbox" data-id="${id}" ${mainStatus === "success" ? "checked" : ""}>
                     <h1 class="task-name">${formName}</h1>
                     <img class="delete" data-id="${id}" src="../vendor/img/task/trash.svg" alt="Удалить">
                 </div>
@@ -20,6 +17,7 @@ export const createTask = ({ id, name, status = ["all", "active"], deadline }) =
                     <p>${deadline}</p>
                 </div>
             </div>
+        </div>
     </div>
     `;
 };

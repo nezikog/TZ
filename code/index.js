@@ -87,9 +87,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         renderTasks(taskArea, createTask);
-        enableTaskNameEditing(taskArea);
-        clearInputs();
     });
+
+    enableTaskNameEditing(taskArea);
+    clearInputs();
 });
 
 // saveBtn.addEventListener("click", () => {
