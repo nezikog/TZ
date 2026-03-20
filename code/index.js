@@ -20,23 +20,44 @@ const taskArea = document.querySelector(".tasks");
 const butt = document.getElementById("addTask");
 
 document.addEventListener("DOMContentLoaded", () => {
+    const data = getDataForTask();
+    
     initTaskHandlers(taskArea);
-    // renderTasks(taskArea, null, createTask());
+    renderTasks(taskArea, null, createTask);
     saveBtn.addEventListener("click", () => {
         const data = getDataForTask();
         if(!data){
             errorThrow();
             return;
         }
-    const tasks = getDataForTask();
-    // const idCount = tasks.length ? tasks[tasks.length - 1].id + 1 : 0;
 
-        const task = createTask(tasks);
+        const taskData = {
+            ...data
+        }
+
+        const task = createTask(taskData);
         taskArea.innerHTML += task;
         saveTask();
         clearInputs();
     });
 });
+
+// saveBtn.addEventListener("click", () => {
+//     let idCount = 0;
+//     const data = getDataForTask();
+//     if(!data){
+//         errorThrow();
+//         return;
+//     }
+//     const taskData = {
+//     id: idCount++,
+//     ...data
+//     };
+//     const task = createTask(taskData);
+//     taskArea.innerHTML += task;
+    
+//     clearInputs();
+// })
 
 
 //SETTINGS FOR TASK

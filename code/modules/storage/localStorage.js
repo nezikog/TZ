@@ -6,7 +6,6 @@ import { createTask } from "../tasks/addTaskLogic.js";
 export const saveTask = () => {
     const task = getDataForTask();
     if (!task) {
-        console.log("Поля формы не заполнены!");
         return;
     }
 
