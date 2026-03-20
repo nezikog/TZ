@@ -9,6 +9,7 @@ import { Empty } from "./modules/tasks/empty.js";
 import { initTaskHandlers } from './modules/tasks/taskHandler.js';
 import { getDataForTask } from "./modules/tasks/form.js";
 import { saveTask, renderTasks } from "./modules/storage/localStorage.js";
+import { filterTasksByCurrentStatus } from "./modules/filter/filterTasks.js";
 
 const modalOverlay = document.getElementById('modalOverlay');
 const addTaskBtn = document.getElementById('addTask');
@@ -19,24 +20,68 @@ const dateInput = document.getElementById("dateTask");
 const taskArea = document.querySelector(".tasks");
 const butt = document.getElementById("addTask");
 
+const actives = document.querySelectorAll(".active");
+const success = document.querySelectorAll(".success");
+const all = document.querySelectorAll(".all");
+
+const filterAll = document.getElementById("all");
+const filterActive = document.getElementById("active");
+const filterSuccess = document.getElementById("success");
+
+let currentFilter = "all";
+
+const resetButtonStyles = () => {
+    filterAll.style.backgroundColor = "";
+    filterActive.style.backgroundColor = "";
+    filterSuccess.style.backgroundColor = "";
+};
+
+const showTasks = (tasksToShow) => {
+    const allTasksElements = document.querySelectorAll(".task");
+    allTasksElements.forEach(task => task.style.display = "none");
+    tasksToShow.forEach(task => task.style.display = "block");
+};
+
+
+
+filterAll.addEventListener("click", () => {
+    currentFilter = "all";
+    resetButtonStyles();
+    filterAll.style.backgroundColor = "red";
+    filterTasksByCurrentStatus(currentFilter);
+});
+
+filterActive.addEventListener("click", () => {
+    currentFilter = "active";
+    resetButtonStyles();
+    filterActive.style.backgroundColor = "red";
+    filterTasksByCurrentStatus(currentFilter);
+});
+
+filterSuccess.addEventListener("click", () => {
+    currentFilter = "success";
+    resetButtonStyles();
+    filterSuccess.style.backgroundColor = "red";
+    filterTasksByCurrentStatus(currentFilter);
+});
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
-    
-    initTaskHandlers(taskArea);
+    initTaskHandlers(taskArea); 
+
+
     renderTasks(taskArea, null, createTask);
+
     saveBtn.addEventListener("click", () => {
         const data = getDataForTask();
-        if(!data){
+        if (!data) {
             errorThrow();
             return;
         }
 
-        const taskData = {
-            ...data
-        }
+        saveTask(taskArea);
 
-        const task = createTask(taskData);
-        taskArea.innerHTML += task;
-        saveTask();
         clearInputs();
     });
 });

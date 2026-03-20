@@ -301,4 +301,8 @@ footer button:hover{
     border: 3px solid rgba(0, 128, 0, 0.528);
 }
 
+.hidden{
+    display: none;
+}
+
 /* OTHER */
